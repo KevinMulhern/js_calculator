@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<link rel="stylesheet"  href="css/reset.css">
+	<link rel="stylesheet"  href="css/style.css">
+</head>
+<body>
+	<div id="calculator">
+		<div class="display-box">
+			<div id="display-panel">0</div>
+		</div>
+
+
+		<div class="button-pad group">
+			<div id="ac" class="btn" onclick="reset()">
+				<spam>AC</span>
+			</div>
+
+			<div id="pos-neg" class="btn" onclick="operations('pos-neg')">
+				<span>/</span>
+			</div>
+
+			<div id="percentage" class="btn" onclick="operations('percentage')">
+				<span>%</span>
+			</div>
+
+			<div id="nine" class="btn" onclick="click_button(9)">
+				<span>9</span>
+			</div>
+
+			<div id="eight" class="btn" onclick="click_button(8)">
+				<span>8</span>
+			</div>
+
+			<div id="seven" class="btn" onclick="click_button(7)">
+				<span>7</span>
+			</div>
+
+			<div id="six" class="btn" onclick="click_button(6)">
+				<span>6</span>
+			</div>
+
+			<div id="five" class="btn" onclick="click_button(5)">
+				<span>5</span>
+			</div>
+
+			<div id="four" class="btn" onclick="click_button(4)">
+				<span>4</span>
+			</div>
+
+			<div id="three" class="btn" onclick="click_button(3)">
+				<span>3</span>
+			</div>
+
+			<div id="two" class="btn" onclick="click_button(2)">
+				<span>2</span>
+			</div>
+
+			<div id="one" class="btn" onclick="click_button(1)">
+				<span>1</span>
+			</div>
+
+			<div id="zero" class="btn-zero" onclick="click_button(0)">
+				<span>0</span>
+			</div>
+
+			<div id="decimal" class="btn" onclick="click_button('.')">
+				<span>.</span>
+			</div>
+		</div>
+
+		<div class="operators">
+			<div id="divide" class="btn" onclick="operations('divide')">
+				<span>&divide;</span>
+			</div>
+
+			<div id="multiply" class="btn" onclick="operations('multiply')">
+				<span>x</span>
+			</div>
+
+			<div id="subtract" class="btn" onclick="operations('subtract')">
+				<span>-</span>
+			</div>
+
+			<div id="add" class="btn" onclick="operations('add')">
+				<span>+</span>
+			</div>
+
+			<div id="equals" class="btn" onclick="operations('equals')">
+				<span>=</span>
+			</div>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="js/application.js"></script>
+</body>
+</html>
