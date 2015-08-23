@@ -43,6 +43,7 @@ function display(val){
 	} else { 
 		display_val.innerHTML = display_val.innerHTML + val;
 	};
+	check_input();
 };
 
 
@@ -166,5 +167,11 @@ function flash(){
 
 function get_display_value(){
 	return document.getElementById("display-panel").innerHTML;
+};
+
+function check_input(){
+	if(get_display_value() == 80085){
+		alert("now now brown cow")
+	};
 };
 
