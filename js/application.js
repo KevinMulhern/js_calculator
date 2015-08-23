@@ -2,30 +2,30 @@ number_1 = 0
 number_2 = 0
 action = ""
 
-count = 1
+count = 0
 
 
 function add(a,b){
-	return +a + +b;
+	return (+a + +b).toFixed(2);
 }
 
 function multiply(a,b){
-	return +a * +b;
+	return (+a * +b).toFixed(2);
 }
 
 function divide(a,b){
-	return +a / +b;
+	return (+a / +b).toFixed(2);
 } 
 
 function subtract(a,b){
-	return +a - +b;
+	return (+a - +b).toFixed(2);
 }
 
 function reset(){
 	document.getElementById("display-panel").innerHTML = 0;
 	number_1 = 0;
 	number_2 = 0;
-	count = 1
+	count = 0
  };
 
  function clear_display(){
@@ -35,10 +35,12 @@ function reset(){
 
 function display(val){
 	var display_val = document.getElementById("display-panel")
-	if( count === 2){
+	if( count === 1){
 		display_val.innerHTML = ""
 		display_val.innerHTML = display_val.innerHTML + val;
-	} else{
+	} else if(count > 10){
+		flash()
+	} else { 
 		display_val.innerHTML = display_val.innerHTML + val;
 	};
 };
