@@ -6,7 +6,7 @@ count = 0
 
 
 function add(a,b){
-	return (+a + +b).toFixed(2);
+	return (+a + +b);
 }
 
 function multiply(a,b){
@@ -18,7 +18,7 @@ function divide(a,b){
 } 
 
 function subtract(a,b){
-	return (+a - +b).toFixed(2);
+	return (+a - +b);
 }
 
 function reset(){
