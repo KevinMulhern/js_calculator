@@ -1,156 +1,102 @@
-body {
-	background-color: #f5f8fa;
-	 position: relative;
-	 width: 100%;
-	 height: 100%;
-	 font-size: 28px;
-	 font-weight: 100;
-	 color: ;
-}
-
 html {
-	width: 100%;
-	height: 100%;
-}
+  background-color: #f5f8fa; }
 
 * {
-	box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 
-#calculator {
-	margin-top: 100px;
-	min-width: 250px;
-	max-width: 250px;
-	width: 25%;
-	margin: 0 auto;
-	height: 320px;
-  	z-index: 100;
-  	border-radius: 10px;
-  	margin-top: 100px;
-}
+.calculator {
+  width: 15%;
+  max-width: 216px; }
 
-.display-box {
-	text-align: right;
-	width: 100%;
-	height: 75px;
-    border-bottom: 1px solid;
-    position: relative;
-    border-top: 1px solid;
-    border-left: 1px solid;
-    border-right: 1px solid;
-    border-radius: 5px 5px 0 0;
-    background:
-        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
-}
+.display {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 4.6em;
+  border-top: 1px solid;
+  border-right: 1px solid;
+  border-left: 1px solid;
+  border-radius: 0.3em 0.3em 0 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)); }
+  .display__output {
+    color: #fff;
+    font-size: 2.5em;
+    font-weight: 100;
+    margin-right: 0.3em;
+    overflow: hidden; }
+
+.body {
+  display: flex;
+  overflow: hidden; }
 
 .button-pad {
-	float: left;
-	width: 75%;
-	background-color: #ddd;
-	border-bottom: 1px solid;
-    border-radius: 0 0 0 5px;
-}
-
-.operators {
-	float: right;
-	width: 25%;
-	background-color: orange;
-	border-right: 1px solid #000;
-    border-bottom: 1px solid #000;
-    border-left: 1px solid #000;
-    border-radius: 0 0 5px;
-    color: #fff;
-}
-
-.button-pad .btn {
-	width: 33.333%;
-	float: left;
-	height: 49px;
-	text-align: center;
-	line-height: 49px;
-}
-
-.btn-zero {
-	width: 66.6%;
-	float: left;
-	height: 49px;
-	text-align: left;
-	line-height: 49px;
-}
-
-.btn-zero span {
-	margin-left: 18%;
-}
+  width: 75%;
+  background-color: #ddd;
+  border-left: 1px solid;
+  border-bottom: 1px solid;
+  border-radius: 0 0 0 0.3em; }
+  .button-pad .btn {
+    width: 33.333%;
+    float: left;
+    border-right: 1px solid; }
 
 .btn {
-	border-bottom: 1px solid #000;
-}
+  height: 3.1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #000; }
+  .btn--large {
+    width: 66.6% !important; }
 
-#decimal, #equals {
-	border-bottom: none;
-}
+.operators {
+  width: 25%;
+  background-color: orange;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-radius: 0 0 0.3em;
+  color: #fff; }
 
-.button-pad .btn, .btn-zero {
-	border-left: 1px solid;
-}
+.pos-neg {
+  position: relative; }
 
-.operators .btn {
-	height: 49px;
-	line-height: 49px;
-	text-align: center;
-}
+.pos-neg:before {
+  content: "+";
+  font-size: 14px;
+  position: absolute;
+  left: 14px;
+  top: 10px; }
 
-.blur {
-	    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    background-position: center;
-    z-index: 99;
-    -webkit-filter: blur(10px);
-    height: 100%;
-}
+.pos-neg:after {
+  content: "-";
+  font-size: 19px;
+  position: absolute;
+  bottom: 13px;
+  right: 16px; }
 
+.operator:active, .equals:active {
+  background-color: #b37400; }
 
+.number:active, .clear:active, .percent:active, .pos-neg:active {
+  background-color: #b7b7b7; }
 
-#display-panel {
-	color: white;
-	text-align: right;
-	font-size: 40px;
-	font-weight: 100;
-	line-height: 70px;
-	margin-right: 8px;
-	overflow: hidden;
-}
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+  .calculator {
+    width: 60%; } }
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .calculator {
+    width: 50%; } }
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .calculator {
+    width: 40%; } }
+@media only screen and (min-width: 992px) and (max-width: 1999px) {
+  .calculator {
+    width: 20%; } }
 
-
-.group:after {
-  content:"";
-  display:table;
-  clear:both;
-}
-
-#pos-neg {
-	position: relative;
-}
-
-#pos-neg span:before {
-	content: "+";
-	font-size: 18px;
-	position: absolute;
-    left: 13px;
-    top: -5px;
-}
-
-#pos-neg span:after {
-	content: "-";
-	font-size: 23px;
-	position: absolute;
-    bottom: -5px;
-    right: 16px;
-}
-
-
-
+/*# sourceMappingURL=style.css.map */

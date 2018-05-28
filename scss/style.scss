@@ -1,0 +1,119 @@
+@import "global";
+
+.calculator {
+  width: 15%;
+  max-width: 216px;
+}
+
+.display {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 4.6em;
+  border-top: 1px solid;
+  border-right: 1px solid;
+  border-left: 1px solid;
+  border-radius: 0.3em 0.3em 0 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+
+  &__output {
+    color: #fff;
+    font-size: 2.5em;
+    font-weight: 100;
+    margin-right: 0.3em;
+    overflow: hidden;
+  }
+}
+
+.body {
+  display: flex;
+  overflow: hidden;
+}
+
+.button-pad {
+	width: 75%;
+	background-color: #ddd;
+	border-left: 1px solid;
+  border-bottom: 1px solid;
+  border-radius: 0 0 0 0.3em;
+
+  .btn {
+    width: 33.333%;
+    float: left;
+    border-right: 1px solid;
+  }
+}
+
+.btn {
+  height: 3.1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #000;
+
+  &--large {
+    width: 66.6% !important;
+  }
+}
+
+.operators {
+	width: 25%;
+	background-color: orange;
+	border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-radius: 0 0 0.3em;
+  color: #fff;
+}
+
+.pos-neg {
+  position: relative;
+}
+
+.pos-neg:before {
+  content: "+";
+  font-size: 14px;
+  position: absolute;
+  left: 14px;
+  top: 10px;
+}
+
+.pos-neg:after {
+  content: "-";
+  font-size: 19px;
+  position: absolute;
+  bottom: 13px;
+  right: 16px;
+}
+
+.operator:active, .equals:active {
+  background-color: darken(orange, 15%);
+}
+
+.number:active, .clear:active, .percent:active, .pos-neg:active {
+  background-color: darken(#ddd, 15%);
+}
+
+
+@media only screen and (min-width: 320px) and (max-width: 479px){
+  .calculator {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .calculator {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+  .calculator {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1999px){
+  .calculator {
+    width: 20%;
+  }
+}

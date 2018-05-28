@@ -1,177 +1,154 @@
-number_1 = 0
-number_2 = 0
-action = ""
-
-count = 0
-
-
-function add(a,b){
-	return (+a + +b);
+class NumberStore {
+  constructor() {
+    this.current = null
+  }
 }
 
-function multiply(a,b){
-	return (+a * +b).toFixed(2);
+class OperationStore {
+  constructor() {
+    this.current = null
+    this.operated = false
+  }
 }
 
-function divide(a,b){
-	return (+a / +b).toFixed(2);
-} 
+const numberStore = new NumberStore();
+const operatorStore = new OperationStore();
+const observer = new MutationObserver(changeClearButton);
 
-function subtract(a,b){
-	return (+a - +b);
+function changeClearButton() {
+  let clearButton = document.querySelector('.clear')
+
+  if (display().textContent == "0") {
+    clearButton.textContent = "AC"
+  } else {
+    clearButton.textContent = "C"
+  }
 }
 
-function reset(){
-	document.getElementById("display-panel").innerHTML = 0;
-	number_1 = 0;
-	number_2 = 0;
-	count = 0
- };
+function display() {
+  return document.querySelector('.display__output')
+}
 
- function clear_display(){
-	document.getElementById("display-panel").innerHTML = "";
- };
+function displayNumber(number) {
+  if(alreadyHasDecimal(number)) return
+  if(isZero(number)) return
 
+  if(operatorStore.operated){
+    operatorStore.operated = false;
+    display().innerHTML = ""
+  }
 
-function display(val){
-	var display_val = document.getElementById("display-panel")
-	if( count === 1){
-		display_val.innerHTML = ""
-		display_val.innerHTML = display_val.innerHTML + val;
-	} else if(count > 10){
-		flash()
-	} else { 
-		display_val.innerHTML = display_val.innerHTML + val;
-	};
-	check_input();
-};
+  display().textContent += number.target.textContent
+  if(removeLeadingZero(number)) display().textContent = display().textContent.replace(/^0+/, '')
+}
 
+function removeLeadingZero(number) {
+  return !display().textContent.includes('.') && number.target.textContent != "0"
+}
 
-function click_button(number){
-	if(number_1.length != 0 && count == 0){
-		clear_display();
-		display(number);
-		count += 1
-	} else {
-		count += 1
-		display(number);
-		
-	}
-};
+function isZero(number) {
+  return number.target.textContent === "0" && display().textContent === "0";
+}
 
+function alreadyHasDecimal(number) {
+  return number.target.textContent == "." && display().textContent.includes(".")
+}
 
-function operations(val){
-	if(val === "pos-neg"){
-		var num = get_display_value();
-		document.getElementById("display-panel").innerHTML = num =- num;
-	};
+function clearDisplay() {
+  numberStore.current = 0;
+  operatorStore.current = "";
+  display().innerHTML = "0";
+}
 
-	if(val === 'percentage'){
-		var num = get_display_value();
-		document.getElementById("display-panel").innerHTML = num / 100;
-	};
+function storeOperator(operator) {
+  if (getDisplayNumber() != 0) {
+    operatorStore.current = operator.target.textContent
+    operatorStore.operated = true;
+    numberStore.current = getDisplayNumber()
+  }
+}
 
-	if(val === 'divide'){
-		store_numbers();
-		flash();
-		apply_operation()
-			action = "divide"
-	};
+function getDisplayNumber() {
+  return parseFloat(display().textContent)
+}
 
-	if(val === 'multiply') {
-		store_numbers();
-		flash();
-		apply_operation();
-		action = "multiply"
-	};
+function setDisplayNumber(number) {
+  display().textContent = Math.round(number * 100) / 100;
+}
 
-	if(val === 'subtract') {
-		store_numbers();
-		flash();
-		apply_operation();
-		action = "subtract"
-	};
+function applyOperation() {
+  const operation = operatorStore.current
+  const firstNumber = numberStore.current
+  const secondNumber = getDisplayNumber()
 
-	if(val === 'add') {
-		store_numbers();
-		flash();
-		apply_operation()
-		action = "add"
-	};
+  switch(operation) {
+    case '+':
+      numberStore.current = add(firstNumber, secondNumber)
+      break;
+    case '-':
+      numberStore.current = subtract(firstNumber, secondNumber)
+      break;
+    case 'x':
+      numberStore.current = multiply(firstNumber, secondNumber)
+      break;
+    case "\u00f7":
+      numberStore.current = divide(firstNumber, secondNumber)
+      break;
+    default:
+      numberStore.current = secondNumber
+  }
 
-	if(val === 'equals') {
-		result()
-	};
-};
-
-
-function store_numbers(){
-	if(number_1  == 0){
-		number_1 = (get_display_value());
-		count = 0;
-	} else{
-		number_2 = (get_display_value());
-		count = 0
-	}
-};
-
-function result(){
-	store_numbers()
-	if (action === "divide"){
-		clear_display()
-		display(divide(number_1, number_2))
-	}
-
-	if (action === "add"){
-		clear_display()
-		display(add(number_1, number_2))
-	}
-
-	if (action === "multiply"){
-		clear_display()
-		display(multiply(number_1, number_2))
-	}
-
-	if (action === "subtract"){
-		clear_display()
-		display(subtract(number_1, number_2))
-	}
+  operatorStore.operated = true;
+  setDisplayNumber(numberStore.current)
 }
 
 
-function clear_numbers(){
-	number_1 = 0
-	number_2 = 0;
+function add(firstNumber, secondNumber) {
+  return firstNumber + secondNumber;
 }
 
-function apply_operation(){
-	if (number_1 != 0 && number_2 != 0){
-		result();
-		number_1 = get_display_value()
-		number_2 = 0
-		count = 0
-
-	}
+function subtract(firstNumber, secondNumber) {
+  return firstNumber - secondNumber;
 }
 
+function multiply(firstNumber, secondNumber) {
+  return firstNumber * secondNumber;
+}
 
+function divide(firstNumber, secondNumber) {
+  if(secondNumber == 0) return "tsk!"
 
+  return firstNumber / secondNumber;
+}
 
+function convertPosNeg(event) {
+  let currentNumber = getDisplayNumber()
 
-function flash(){
-	document.getElementById("display-panel").style.display = 'none';
-	setTimeout(function(){
-		document.getElementById("display-panel").style.display = 'block';
-	}, 100);
-};
+  if (currentNumber > 0) {
+    setDisplayNumber(-Math.abs(currentNumber))
+  } else {
+    setDisplayNumber(Math.abs(currentNumber))
+  }
+}
 
-function get_display_value(){
-	return document.getElementById("display-panel").innerHTML;
-};
+function convertToPercent(event) {
+  let currentNumber = getDisplayNumber()
 
-function check_input(){
-	if(get_display_value() == 80085){
-		alert("now now brown cow")
-	};
-};
+  if (currentNumber > 0) {
+    setDisplayNumber(currentNumber / 100)
+  }
+}
 
+document.querySelectorAll('.number').forEach(function(number){
+  number.addEventListener('click', displayNumber, number)
+});
+
+document.querySelectorAll('.operator').forEach(function(operator){
+  operator.addEventListener('click', storeOperator)
+})
+
+document.querySelector('.equals').addEventListener('click', applyOperation)
+document.querySelector('.clear').addEventListener('click', clearDisplay)
+document.querySelector('.pos-neg').addEventListener('click', convertPosNeg)
+document.querySelector('.percent').addEventListener('click', convertToPercent)
+observer.observe(display(), { childList: true })
