@@ -56,11 +56,16 @@ function alreadyHasDecimal(number) {
 
 function clearDisplay() {
   numberStore.current = 0;
-  operatorStore.current = "";
+  operatorStore.current = null;
   display().innerHTML = "0";
 }
 
 function storeOperator(operator) {
+
+  if (numberStore.current) {
+    applyOperation()
+  }
+
   if (getDisplayNumber() != 0) {
     operatorStore.current = operator.target.textContent
     operatorStore.operated = true;
@@ -97,6 +102,10 @@ function applyOperation() {
     default:
       numberStore.current = secondNumber
   }
+
+  console.log('first number', firstNumber)
+  console.log('second number', getDisplayNumber())
+  console.log('current operation', operatorStore.current)
 
   operatorStore.operated = true;
   setDisplayNumber(numberStore.current)
